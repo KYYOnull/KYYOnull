@@ -16,7 +16,7 @@ export class Booking {
     @Column({ comment: '会议结束时间' })
     endTime: Date;
 
-    @Column({ length: 20, comment: '状态（ask、pass、reject、unbound）', default: 'ask' })
+    @Column({ length: 20, comment: '状态（申请中、审批通过、审批驳回、已解除）', default: '' })
     status: string;
 
     @Column({ length: 100, comment: '备注', default: '' })
