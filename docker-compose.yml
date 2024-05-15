@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+
+  nest-app:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    depends_on:
+      - mysql-container
+      - redis-container
+    ports:
+      - 8001:8001 # 通过 Dockerfile 构建，暴露端口
+    networks:
+      - common-network
+
+  mysql-container:
+    image: mysql:5.7
+    volumes:
+      - D:\data\MySQL\mysql_docker:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: meeting_room_booking_system
+      MYSQL_ROOT_PASSWORD: 123456
+    ports:
+      - '3306:3306'
+    networks:
+      - common-network
+
+  redis-container:
+    image: redis
+    volumes:
+      - D:\data\redis:/data
+    ports:
+      - '6379:6379'
+    networks:
+      - common-network
+networks:
+  common-network:
+    driver: bridge
